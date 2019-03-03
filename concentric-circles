@@ -1,0 +1,16 @@
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  for (var i = 10; i <= 400; i = i + 10) {
+    ellipse(200, i, i,i);
+  }
+  
+    //for (var i = 0; i < x.length; i = i + 10) {
+    //var w = 1 + (x.length - i);
+    //rect(x[i] - w/2, y[i] - w/2, w, w);
+    //rect(x[i], y[i], w, w)
+  
+}
