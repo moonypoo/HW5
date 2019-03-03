@@ -1,0 +1,123 @@
+//The Ball or puck
+var puck = {
+  x: 200,
+  y: 100,
+  vx: -1,
+  vy: 2,
+  size: 5,
+}
+
+// Scores
+var leftScore = 0;
+var rightScore = 0;
+
+var leftY = 200; //Left Player
+var rightY = 200; //Right Player
+var playerWidth = 15;
+var playerHeight = 75;
+var playerSpeed = 5;
+
+function setup() {
+  createCanvas(400, 400);
+}
+
+
+
+function draw() {
+  background(220);
+
+
+  line(width / 2, 0, width / 2, height);
+
+  // Draw The Puck
+  rectMode(CENTER);
+  rect(puck.x, puck.y, puck.size, puck.size);
+
+  // Draw Left Player
+  rectMode(CORNER);
+  rect(0, leftY, playerWidth, playerHeight);
+
+  // Draw right player
+  rect(width - playerWidth - 1, rightY, playerWidth, playerHeight)
+
+  // UPdate puck Position
+  puck.x += puck.vx;
+  puck.y += puck.vy;
+
+  // Check if puck hits the top or bottom
+  if (puck.y < 0 || puck.y > height) {
+    puck.vy = puck.vy * -1;
+  }
+
+  // Check if a player scored
+  if (puck.x < 0) {
+    text("Point for Player Right!", 100, 100);
+    noLoop()
+  }
+
+  if (puck.x > width) {
+    text("Point for Player Left!", 100, 100);
+    noLoop()
+  }
+
+  // Check if puck hitting left paddle
+  if (puck.x < 0 + playerWidth) {
+    if (puck.y > leftY && puck.y < leftY + playerHeight) {
+      puck.vx = puck.vx * -1;
+    }
+  }
+  
+  // Check if puck hitting rightzpaddle
+  if (puck.x > width - playerWidth) {
+    if (puck.y > rightY && puck.y < rightY + playerHeight) {
+      puck.vx = puck.vx * -1;
+    }
+  }
+
+    //Read Input to update play positions
+    if (keyIsDown(UP_ARROW)) {
+      rightY -= playerSpeed;
+
+    }
+
+    if (keyIsDown(DOWN_ARROW)) {
+      rightY += playerSpeed;
+
+    }
+
+    if (keyIsDown(65)) {
+      leftY -= playerSpeed;
+    }
+
+    if (keyIsDown(90)) {
+      leftY += playerSpeed;
+    }
+
+    // Constrain paddles to the screen
+    if (leftY < 0) {
+      leftY = 0;
+    }
+    if (rightY < 0) {
+      rightY = 0;
+    }
+
+    if (rightY > height - playerHeight) {
+      rightY = height - playerHeight;
+    }
+
+    if (leftY > height - playerHeight) {
+      leftY = height - playerHeight;
+    }
+
+    // Check if a player scored
+  if (puck.x > width) {
+    text("Left player scores a point!", 100, 100);
+    noLoop();
+  }
+  if (puck.x < 0) {
+    text("Right player scores a point!", 100, 100);
+    noLoop();
+  }
+
+  
+  }
