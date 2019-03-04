@@ -4,8 +4,9 @@ function setup() {
 
 function draw() {
   background(220);
+  noFill();
   for (var i = 10; i <= 400; i = i + 10) {
-    ellipse(200, i, i,i);
+    ellipse(200, i, i);
   }
   
     //for (var i = 0; i < x.length; i = i + 10) {
